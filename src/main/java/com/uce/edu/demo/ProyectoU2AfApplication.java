@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.modelo.Persona;
 import com.uce.edu.demo.service.IPersonaJDBCService;
+import com.uce.edu.demo.tarea13.modelo.Estudiante;
+import com.uce.edu.demo.tarea13.service.IEstudianteJDBCService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -18,7 +20,7 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 
 	@Autowired
-	private IPersonaJDBCService personaJDBCService;
+	private IEstudianteJDBCService estudianteJDBCService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -29,26 +31,38 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 		// TODO Auto-generated method stub
 		
 		//Insertar
-		Persona persona=new Persona();
-		persona.setNombre("Pepe");
-		persona.setApellido("Paredez");
-		persona.setId(1235);
-		//this.personaJDBCService.guardar(p);
-		
-		//Actualizar
-		Persona per1=new Persona();
-		per1.setNombre("Pepe");
-		per1.setApellido("Velez");
-		per1.setId(1235);
-		//this.personaJDBCService.actualizar(per1);
-		
-		//Eliminar
-		//this.personaJDBCService.eliminar(per1.getId());
+		Estudiante estudiante=new Estudiante();
+		estudiante.setCedula("1752310126");
+		estudiante.setNombre("Axelfff");
+		estudiante.setApellido("Florres");
+		estudiante.setFacultad("Ingenieria en ciencias aplicadas.");
+		estudiante.setCarrera("Computacion");
+		this.estudianteJDBCService.insertar(estudiante);
 		
 		//Buscar
-		Persona personaBucar=this.personaJDBCService.buscar(3);
-		LOG.info("!!PERSONA ENCONTRADA¡¡");
-		LOG.info(personaBucar);
+		Estudiante estudianteBucar=this.estudianteJDBCService.buscarEstudiante(estudiante.getCedula());
+		LOG.info("!!ESTUDIANTE ENCONTRADO¡¡");
+		LOG.info(estudianteBucar);
+		
+		//Actualizar
+		Estudiante estu1=new Estudiante();
+		estu1.setCedula("1752310126");
+		estu1.setNombre("Axel");
+		estu1.setApellido("Flores");
+		estu1.setFacultad("Ingenieria en ciencias aplicadas.");
+		estu1.setCarrera("Computacion");
+		this.estudianteJDBCService.actualizar(estu1);
+		
+		//Buscar
+		estudianteBucar=this.estudianteJDBCService.buscarEstudiante(estu1.getCedula());
+		LOG.info("!!ESTUDIANTE ACTUALIZADO ENCONTRADO¡¡");
+		LOG.info(estudianteBucar);
+		
+		//Eliminar
+		this.estudianteJDBCService.eliminar(estu1.getCedula());
+		LOG.info("!!ESTUDIANTE ELIMINADO¡¡");
+		
+		
 	}
 
 }
