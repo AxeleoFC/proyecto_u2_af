@@ -8,12 +8,11 @@
 		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	
 	<groupId>com.uce.avanzada</groupId>
 	<artifactId>proyecto_u2_af</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>proyecto_u2_af</name>
-	<description>Proyecto 2 PII</description>
+	<description>Proyecto 2 PAII</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

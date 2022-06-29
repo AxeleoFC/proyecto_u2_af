@@ -1,10 +1,12 @@
 package com.uce.edu.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.modelo.Persona;
 import com.uce.edu.demo.repository.IPersonaJDBCRepository;
+import com.uce.edu.demo.to.PersonaTo;
 @Service
 public class PersonaJDBCServiceImpl implements IPersonaJDBCService {
 
@@ -12,13 +14,13 @@ public class PersonaJDBCServiceImpl implements IPersonaJDBCService {
 	private IPersonaJDBCRepository personaJDBCRepo;
 	
 	@Override
-	public void guardar(Persona p) {
+	public void guardar(PersonaTo p) {
 		// TODO Auto-generated method stub
 		this.personaJDBCRepo.insertar(p);
 	}
 
 	@Override
-	public void actualizar(Persona p) {
+	public void actualizar(PersonaTo p) {
 		// TODO Auto-generated method stub
 		this.personaJDBCRepo.actualizar(p);
 	}
@@ -30,9 +32,15 @@ public class PersonaJDBCServiceImpl implements IPersonaJDBCService {
 	}
 
 	@Override
-	public Persona buscar(int id) {
+	public PersonaTo buscar(int id) {
 		// TODO Auto-generated method stub
 		return this.personaJDBCRepo.buscarPorId(id);
+	}
+
+	@Override
+	public List<PersonaTo> buscarTodos() {
+		// TODO Auto-generated method stub
+		return this.personaJDBCRepo.buscarTodos();
 	}
 
 }
