@@ -7,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.service.IPersonaJPAService;
+import com.uce.edu.demo.tarea14.repository.modelo.EstudianteJPA;
+import com.uce.edu.demo.tarea14.service.IEstudianteJPAService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 
 	@Autowired
-	private IPersonaJPAService personaJPACService;
+	private IEstudianteJPAService estudianteJPACService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -30,24 +30,32 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 		// TODO Auto-generated method stub
 		
 		//Insertar
-		Persona per=new Persona();
-		per.setId(7);
-		per.setNombre("Miguel");
-		per.setApellido("Alfredo");
-		//this.personaJPACService.guardar(per);
+		EstudianteJPA estudiante=new EstudianteJPA();
+		estudiante.setCedula("1752310126");
+		estudiante.setNombre("Miguelss");
+		estudiante.setApellido("Herreras");
+		estudiante.setFacultad("Ingenieria en ciencias aplicadas.");
+		estudiante.setCarrera("Computacion");
+		this.estudianteJPACService.insertar(estudiante);
 		
 		//Buscar
-		LOG.info("Datos con JPA: "+this.personaJPACService.buscar(3));
+		LOG.info("Datos con JPA: "+this.estudianteJPACService.buscarEstudiante("1752310126"));
 
 		//Actualizar
-		Persona per1=new Persona();
-		per1.setId(1235);
-		per1.setNombre("Andrea");
-		per1.setApellido("Solis");
-		//this.personaJPACService.actualizar(per1);
+		EstudianteJPA estu1=new EstudianteJPA();
+		estu1.setCedula("1752310126");
+		estu1.setNombre("Miguel");
+		estu1.setApellido("Herrera");
+		estu1.setFacultad("Ingenieria en ciencias aplicadas.");
+		estu1.setCarrera("Computacion");
+		this.estudianteJPACService.actualizar(estu1);
 
+		//Buscar
+		LOG.info("Datos con JPA: "+this.estudianteJPACService.buscarEstudiante("1752310126"));
+				
+				
 		//Eliminar
-		//this.personaJPACService.eliminar(1235);
+		this.estudianteJPACService.eliminar("1752310126");
 
 	}
 
