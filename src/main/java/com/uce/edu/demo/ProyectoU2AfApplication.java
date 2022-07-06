@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +32,25 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 		// TODO Auto-generated method stub
 
 		//Buscar
-		LOG.info("Datos con JPA: "+this.personaJPACService.buscar(3));
+		//LOG.info("Datos con JPA: "+this.personaJPACService.buscar(3));
 		
 		//Insertar
 		Persona per=new Persona();
 		//per.setId(7);
 		per.setNombre("Pepe");
 		per.setApellido("Perez");
-		this.personaJPACService.guardar(per);
+		per.setGenero("M");
+		per.setCedula("1753663245");
+		//this.personaJPACService.guardar(per);
+		
+		//Buscar por cedula
+		Persona p=this.personaJPACService.buscarPorCedula("1758963245");
+		LOG.info("Persona encontrada: "+p);
+		
+		List<Persona> listaPersona=this.personaJPACService.buscarPorApellido("Perez");
+		for(Persona persona:listaPersona) {
+			LOG.info("Persona encontrada: "+persona);
+		}
 
 		//Actualizar
 		Persona per1=new Persona();
