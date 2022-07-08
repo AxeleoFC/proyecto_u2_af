@@ -64,12 +64,12 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 	public List<Persona> buscarPorGenero(String genero) {
 		// TODO Auto-generated method stub
 		
-//		//SQL = SELECT * FROM persona WHERE pers_genero=''
-//		//Mapeo: JPQL= SELECT p FROM Persona p WHERE p.genero= :datoGenero
-//		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.genero= :datoGenero");
-//		jpqlQuery.setParameter("datoGenero", genero);
-//				
-		return null;
+		//SQL = SELECT * FROM persona WHERE pers_genero=''
+		//Mapeo: JPQL= SELECT p FROM Persona p WHERE p.genero= :datoGenero
+		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.genero= :datoGenero");
+		jpqlQuery.setParameter("datoGenero", genero);
+				
+		return jpqlQuery.getResultList();
 	}
 
 	@Override
@@ -87,7 +87,13 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 	@Override
 	public List<Persona> buscarPorNombre(String nombre) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		//SQL = SELECT * FROM persona WHERE pers_nombre=''
+		//Mapeo: JPQL= SELECT p FROM Persona p WHERE p.nombre= :datoGenero
+		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.nombre= :datoNombre");
+		jpqlQuery.setParameter("datoNombre", nombre);
+						
+		return jpqlQuery.getResultList();
 	}
 
 

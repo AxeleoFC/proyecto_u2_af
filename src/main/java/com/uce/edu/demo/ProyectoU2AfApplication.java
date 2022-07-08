@@ -31,37 +31,14 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		//Buscar
-		//LOG.info("Datos con JPA: "+this.personaJPACService.buscar(3));
+		//Buscar por nombre
 		
-		//Insertar
-		Persona per=new Persona();
-		//per.setId(7);
-		per.setNombre("Pepe");
-		per.setApellido("Perez");
-		per.setGenero("M");
-		per.setCedula("1753663245");
-		//this.personaJPACService.guardar(per);
-		
-		//Buscar por cedula
-		Persona p=this.personaJPACService.buscarPorCedula("1758963245");
-		LOG.info("Persona encontrada: "+p);
-		
-		List<Persona> listaPersona=this.personaJPACService.buscarPorApellido("Perez");
-		for(Persona persona:listaPersona) {
-			LOG.info("Persona encontrada: "+persona);
-		}
+		List<Persona> listaPersonaNombre=this.personaJPACService.buscarPorNombre("Pepe");
+		listaPersonaNombre.stream().forEach(persona -> {LOG.info("Persona encontrada por nombre: "+persona);});
 
-		//Actualizar
-		Persona per1=new Persona();
-		per1.setId(1235);
-		per1.setNombre("Andrea");
-		per1.setApellido("Solis");
-		//this.personaJPACService.actualizar(per1);
-				
-				
-		//Eliminar
-		//this.personaJPACService.eliminar(10);
+		//Buscar por genero
+		List<Persona> listaPersonaGenero=this.personaJPACService.buscarPorGenero("F");
+		listaPersonaGenero.stream().forEach(persona -> {LOG.info("Persona encontrada por genero: "+persona);});
 
 	}
 
