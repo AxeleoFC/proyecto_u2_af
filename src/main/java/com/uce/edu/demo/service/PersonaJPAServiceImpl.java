@@ -61,4 +61,16 @@ public class PersonaJPAServiceImpl implements IPersonaJPAService {
 		return this.personaJPARepo.buscarPorGenero(genero);
 	}
 
+	@Override
+	public int actualizarPorApellido(String genero, String apellido) {
+		// TODO Auto-generated method stub
+		return this.personaJPARepo.actualizarPorApellido(genero, apellido);
+	}
+
+	@Override
+	public int eliminarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		return this.personaJPARepo.eliminarPorGenero(genero);
+	}
+
 }

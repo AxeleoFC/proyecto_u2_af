@@ -30,16 +30,15 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-
-		//Buscar por nombre
+				
+		//Actualizar con JPQL
+		int resultados=this.personaJPACService.actualizarPorApellido("Femenino", "Perez");
+		LOG.info("Cantidad de registros actualizados: "+resultados);
 		
-		List<Persona> listaPersonaNombre=this.personaJPACService.buscarPorNombre("Pepe");
-		listaPersonaNombre.stream().forEach(persona -> {LOG.info("Persona encontrada por nombre: "+persona);});
-
-		//Buscar por genero
-		List<Persona> listaPersonaGenero=this.personaJPACService.buscarPorGenero("F");
-		listaPersonaGenero.stream().forEach(persona -> {LOG.info("Persona encontrada por genero: "+persona);});
+		//Actualizar con JPQL
+		int resultados2=this.personaJPACService.eliminarPorGenero("M");
+		LOG.info("Cantidad de registros eliminados: "+resultados2);
+		
 
 	}
-
 }
