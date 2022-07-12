@@ -15,15 +15,12 @@ import com.uce.edu.demo.repository.modelo.Persona;
 @Transactional
 public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 	
-	//Al usar JPA se usa la sentencia para
-	//interactuar con la BD
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
 	public Persona buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
-		//Para de buscar con JPA
 		return this.entityManager.find(Persona.class, id);
 	}
 
@@ -73,7 +70,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 	@Override
 	public Persona buscarPorCedulaNamed(String cedula) {
 		// TODO Auto-generated method stub
-		//NmedQuery
+		//NamedQuery
 		Query myQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula");
 		myQuery.setParameter("datoCedula", cedula);
 		return (Persona) myQuery.getSingleResult();

@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.service.IPersonaJPAService;
+import com.uce.edu.demo.tarea17.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17.service.IEstudianteJPAQueryService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -19,9 +19,9 @@ import com.uce.edu.demo.service.IPersonaJPAService;
 public class ProyectoU2AfApplication implements CommandLineRunner{
 	
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
-
+	
 	@Autowired
-	private IPersonaJPAService personaJPACService;
+	private IEstudianteJPAQueryService estudianteJPAService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -30,25 +30,23 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-				
-		Persona per =new Persona();
-		per.setNombre("Axel");
-		per.setApellido("Flores");
-		per.setCedula("1258963459");
-		per.setGenero("M");
-		//this.personaJPACService.guardar(per);
+		
 		
 		//1 TypedQuery
-		Persona perTyped=this.personaJPACService.buscarPorCedulaTyped("1000236598");
-		LOG.info("Persona Typed: "+perTyped);
+		List<EstudianteQuery> estudianList1=this.estudianteJPAService.buscarPorFacultad("Ingenieria en ciencias aplicadas.");
+		estudianList1.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por facultad: "+estudiante);});
+		List<EstudianteQuery> estudianList2=this.estudianteJPAService.buscarPorCarrera("Computacion");
+		estudianList2.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por carrera: "+estudiante);});
 		//2 NamedQuery
-		Persona perNamed=this.personaJPACService.buscarPorCedulaNamed("1000236598");
-		LOG.info("Persona Named: "+perNamed);
+		EstudianteQuery estu=this.estudianteJPAService.buscarPorCedula("1752310126");
+		LOG.info("Buscar estudiante por cedula: "+estu);
+		List<EstudianteQuery> estudianList3=this.estudianteJPAService.buscarPorNombre("Emily");
+		estudianList3.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por nombre: "+estudiante);});
 		//3 TypedQuery y NamedQuery
-		Persona perTypedNamed=this.personaJPACService.buscarPorCedulaTypedNamed("1000236598");
-		LOG.info("Persona TypedNamed: "+perTypedNamed);
-		//4 Varios NamedQuery
-		List<Persona> listaPersona=this.personaJPACService.buscarPorNombreApellido("Axel","Flores");
-		listaPersona.stream().forEach(persona -> {LOG.info("Busqueda de persona por nombre y apellidos: "+persona);});
+		List<EstudianteQuery> estudianList4=this.estudianteJPAService.buscarPorNombreApellido("Pepe","Paredez");
+		estudianList4.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por nombre y apellido: "+estudiante);});
+		List<EstudianteQuery> estudianList5=this.estudianteJPAService.buscarPorNombreFacultad("Emily","Medicina.");
+		estudianList4.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por nombre y facultad: "+estudiante);});
+	
 	}
 }
