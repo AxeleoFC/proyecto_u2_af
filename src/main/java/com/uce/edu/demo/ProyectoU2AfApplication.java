@@ -1,7 +1,6 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,11 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.tarea16.repository.modelo.Propietario;
-import com.uce.edu.demo.tarea16.repository.modelo.Vehiculo;
-import com.uce.edu.demo.tarea16.service.IMatriculaGestorService;
-import com.uce.edu.demo.tarea16.service.IPropietarioService;
-import com.uce.edu.demo.tarea16.service.IVehiculoService;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJPAService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -25,11 +21,7 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 
 	@Autowired
-	private IMatriculaGestorService matriculaService;
-	@Autowired
-	private IPropietarioService propietarioService;
-	@Autowired
-	private IVehiculoService vehiculoService;
+	private IPersonaJPAService personaJPACService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -39,33 +31,24 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 				
-		Vehiculo vehiculo=new Vehiculo();
-		vehiculo.setMarca("Totota");
-		vehiculo.setPlaca("PCT8673");
-		vehiculo.setPrecio(new BigDecimal(5000));
-		vehiculo.setTipo("P");
-		this.vehiculoService.ingresarVehiculo(vehiculo);
-		LOG.info("Vehiculo guardado");
+		Persona per =new Persona();
+		per.setNombre("Axel");
+		per.setApellido("Flores");
+		per.setCedula("1258963459");
+		per.setGenero("M");
+		//this.personaJPACService.guardar(per);
 		
-		//2
-		vehiculo.setMarca("Toyota");
-		vehiculo.setPrecio(new BigDecimal(10000));
-		this.vehiculoService.actualizarVehiculo(vehiculo);
-		LOG.info("Vehiculo actualizado");
-		
-		//3
-		Propietario p=new Propietario();
-		p.setNombre("Axel");
-		p.setApellido("Flores");
-		p.setCedula("1752310126");
-		p.setFechaNacimiento(LocalDateTime.of(2000, 06, 28, 23, 23));
-		this.propietarioService.ingresarPropietario(p);
-		LOG.info("Propietario guardado");
-		
-		//4
-		this.matriculaService.crearMatricula(p.getCedula(), vehiculo.getPlaca());
-		LOG.info("Matricula generada");
-		
-
+		//1 TypedQuery
+		Persona perTyped=this.personaJPACService.buscarPorCedulaTyped("1000236598");
+		LOG.info("Persona Typed: "+perTyped);
+		//2 NamedQuery
+		Persona perNamed=this.personaJPACService.buscarPorCedulaNamed("1000236598");
+		LOG.info("Persona Named: "+perNamed);
+		//3 TypedQuery y NamedQuery
+		Persona perTypedNamed=this.personaJPACService.buscarPorCedulaTypedNamed("1000236598");
+		LOG.info("Persona TypedNamed: "+perTypedNamed);
+		//4 Varios NamedQuery
+		List<Persona> listaPersona=this.personaJPACService.buscarPorNombreApellido("Axel","Flores");
+		listaPersona.stream().forEach(persona -> {LOG.info("Busqueda de persona por nombre y apellidos: "+persona);});
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -59,6 +60,34 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		//Da un objeto de tipo Persona
 		return (Persona) jpqlQuery.getSingleResult();
 	}
+	
+	@Override
+	public Persona buscarPorCedulaTyped(String cedula) {
+		// TODO Auto-generated method stub
+		//TypedQuery
+		TypedQuery<Persona> miTypedQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula= :datoCedula",Persona.class);
+		miTypedQuery.setParameter("datoCedula", cedula);
+		return miTypedQuery.getSingleResult();
+	}
+	
+	@Override
+	public Persona buscarPorCedulaNamed(String cedula) {
+		// TODO Auto-generated method stub
+		//NmedQuery
+		Query myQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula");
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+	
+	@Override
+	//Union de typed y Named
+	public Persona buscarPorCedulaTypedNamed(String cedula) {
+		// TODO Auto-generated method stub
+		//NmedQuery
+		TypedQuery<Persona> myQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula",Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
 
 	@Override
 	public List<Persona> buscarPorGenero(String genero) {
@@ -81,6 +110,15 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		Query myQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.apellido= :datoApellido");
 		myQuery.setParameter("datoApellido", apellido);
 		//Para retornar una lista
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Persona> buscarPorNombreApellido(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		TypedQuery<Persona> myQuery=this.entityManager.createNamedQuery("Persona.buscarPorNombreApellido",Persona.class);
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);
 		return myQuery.getResultList();
 	}
 
@@ -118,6 +156,5 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		//Devuelve el numero de actualizaciones o eliminaciones que halla echo
 		return myQuery.executeUpdate();
 	}
-
 
 }
