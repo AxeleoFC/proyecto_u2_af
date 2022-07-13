@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -84,6 +87,49 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		TypedQuery<Persona> myQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula",Persona.class);
 		myQuery.setParameter("datoCedula", cedula);
 		return myQuery.getSingleResult();
+	}
+
+	//Uso de NativeQuery
+	@Override
+	public Persona buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		//No se usa sentencias JPQL
+		//Aqqui usamos SQL puro
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM persona WHERE pers_cedula = :datoCedula",
+				Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+	
+	//Uso de NativeQuery con Named
+	@Override
+	public Persona buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		//Se usa igual que un Named pero tener en cuenta que se usa SQL y no JPQL
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNative", Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	//Criterial APi
+	@Override
+	public Persona buscarPorCedulaCriterialAPI(String cedula) {
+		// TODO Auto-generated method stub
+		
+		CriteriaBuilder myBuilder=this.entityManager.getCriteriaBuilder();
+		
+		// Transforma un CriteriaBuilder a un CriteriaQuery de tipo Persona
+		CriteriaQuery<Persona> myQuery=myBuilder.createQuery(Persona.class);
+		
+		// Root FROM
+		Root<Persona> personaRoot = myQuery.from(Persona.class);
+		
+		//Hace root a personaRoot, 
+		//La parte del WHERE es para pasar los parametros que deseamos comparar
+		//--->myQuery.select(personaRoot).where(myBuilder.equal(personaRoot.get("cedula"), cedula)); esto devuelve la sentencia
+		
+		TypedQuery<Persona> myQueryFinal=this.entityManager.createQuery(myQuery.select(personaRoot).where(myBuilder.equal(personaRoot.get("cedula"), cedula)));
+		return myQueryFinal.getSingleResult();
 	}
 
 	@Override

@@ -60,6 +60,20 @@ public class PersonaJPAServiceImpl implements IPersonaJPAService {
 		// TODO Auto-generated method stub
 		return this.personaJPARepo.buscarPorCedulaTypedNamed(cedula);
 	}
+	
+	//Uso de NativeQuery
+	@Override
+	public Persona buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.personaJPARepo.buscarPorCedulaNative(cedula);
+	}
+
+	//Uso de NativeQuery con Named y Typed
+	@Override
+	public Persona buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.personaJPARepo.buscarPorCedulaNamedNative(cedula);
+	}
 
 	@Override
 	public List<Persona> buscarPorApellido(String apellido) {
