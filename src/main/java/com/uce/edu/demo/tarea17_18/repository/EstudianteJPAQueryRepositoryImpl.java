@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea17.repository;
+package com.uce.edu.demo.tarea17_18.repository;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.tarea17.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
 
 @Repository
 @Transactional
@@ -96,6 +96,45 @@ public class EstudianteJPAQueryRepositoryImpl implements IEstudianteJPAQueryRepo
 		TypedQuery<EstudianteQuery> myQuery=this.entityManager.createNamedQuery("EstudianteQuery.buscarPorNombreFacultad",EstudianteQuery.class);
 		myQuery.setParameter("datoNombre", nombre);
 		myQuery.setParameter("datoFacultad", facultad);
+		return myQuery.getResultList();
+	}
+
+	
+	//Tarea 18
+	//NativeQuery
+	@Override
+	public EstudianteQuery buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante_query WHERE estu_cedula = :datoCedula",
+				EstudianteQuery.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (EstudianteQuery) myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarPorNombreNative(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM estudiante_query WHERE estu_nombre = :datoNombre",
+				EstudianteQuery.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.getResultList();
+	}
+	// NamedNativeQuery
+	@Override
+	public List<EstudianteQuery> buscarPorFacultadCarrera(String facultad, String carrera) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteQuery> myQuery = this.entityManager.createNamedQuery("EstudianteQuery.buscarPorFacultadCarrera", EstudianteQuery.class);
+		myQuery.setParameter("datoFacultad", facultad);
+		myQuery.setParameter("datoCarrera", carrera);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarPorNombreCarrera(String nombre, String carrera) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteQuery> myQuery = this.entityManager.createNamedQuery("EstudianteQuery.buscarPorNombreCarrera", EstudianteQuery.class);
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoCarrera", carrera);
 		return myQuery.getResultList();
 	}
 

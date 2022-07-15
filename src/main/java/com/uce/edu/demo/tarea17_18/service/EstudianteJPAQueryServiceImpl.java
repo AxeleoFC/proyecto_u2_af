@@ -1,12 +1,12 @@
-package com.uce.edu.demo.tarea17.service;
+package com.uce.edu.demo.tarea17_18.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.tarea17.repository.IEstudianteJPAQueryRepository;
-import com.uce.edu.demo.tarea17.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18.repository.IEstudianteJPAQueryRepository;
+import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
 
 @Service
 public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService {
@@ -73,6 +73,31 @@ public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService
 	public List<EstudianteQuery> buscarPorNombreFacultad(String nombre, String facultad) {
 		// TODO Auto-generated method stub
 		return this.estudianteRepo.buscarPorNombreFacultad(nombre, facultad);
+	}
+
+	//Tarea 18
+	@Override
+	public EstudianteQuery buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorCedulaNative(cedula);
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarPorNombreNative(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorNombreNative(nombre);
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarPorFacultadCarrera(String facultad, String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorFacultadCarrera(facultad, carrera);
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarPorNombreCarrera(String nombre, String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorNombreCarrera(nombre, carrera);
 	}
 
 }

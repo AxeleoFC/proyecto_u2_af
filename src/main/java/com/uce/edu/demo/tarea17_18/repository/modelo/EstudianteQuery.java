@@ -1,11 +1,14 @@
-package com.uce.edu.demo.tarea17.repository.modelo;
+package com.uce.edu.demo.tarea17_18.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.uce.edu.demo.repository.modelo.Persona;
 
 @Entity
 @Table(name = "estudiante_query")
@@ -14,6 +17,11 @@ import javax.persistence.Table;
 	@NamedQuery(name = "EstudianteQuery.buscarPorNombre", query = "SELECT e FROM EstudianteQuery e WHERE e.nombre= :datoNombre"),
 	@NamedQuery(name = "EstudianteQuery.buscarPorNombreApellido", query = "SELECT e FROM EstudianteQuery e WHERE e.nombre= :datoNombre AND e.apellido= :datoApellido"),
     @NamedQuery(name = "EstudianteQuery.buscarPorNombreFacultad", query = "SELECT e FROM EstudianteQuery e WHERE e.nombre= :datoNombre AND e.facultad= :datoFacultad")})
+
+//NativeQuery
+@NamedNativeQuery(name = "EstudianteQuery.buscarPorFacultadCarrera", query = "SELECT * FROM estudiante_query WHERE estu_facultad = :datoFacultad AND estu_carrera= :datoCarrera", resultClass = EstudianteQuery.class)
+@NamedNativeQuery(name = "EstudianteQuery.buscarPorNombreCarrera", query = "SELECT * FROM estudiante_query WHERE estu_nombre = :datoNombre AND estu_carrera= :datoCarrera", resultClass = EstudianteQuery.class)
+
 public class EstudianteQuery {
 	@Id
 	@Column(name = "estu_cedula")

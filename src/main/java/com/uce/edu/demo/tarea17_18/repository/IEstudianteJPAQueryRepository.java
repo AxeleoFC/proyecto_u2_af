@@ -1,9 +1,8 @@
-package com.uce.edu.demo.tarea17.repository;
+package com.uce.edu.demo.tarea17_18.repository;
 
 import java.util.List;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.tarea17.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
 
 public interface IEstudianteJPAQueryRepository {
 	
@@ -21,4 +20,14 @@ public interface IEstudianteJPAQueryRepository {
 	//Typed y Named
 	public List<EstudianteQuery> buscarPorNombreApellido(String nombre, String apellido);
 	public List<EstudianteQuery> buscarPorNombreFacultad(String nombre, String facultad);
+	
+	//Tarea 18
+	// NativeQuery
+	public EstudianteQuery buscarPorCedulaNative(String cedula);
+	public List<EstudianteQuery> buscarPorNombreNative(String nombre);
+	// NamedNativeQuery
+	public List<EstudianteQuery> buscarPorFacultadCarrera(String facultad, String carrera);
+	public List<EstudianteQuery> buscarPorNombreCarrera(String nombre, String carrera);
+	
+	
 }
