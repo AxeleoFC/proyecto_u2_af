@@ -172,7 +172,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		return myQueryFinal.getSingleResult();
 	}
 	
-	public Persona buscarDinamicamentePredicados(String nombre, String apellido, String genero) {
+	public List<Persona> buscarDinamicamentePredicados(String nombre, String apellido, String genero) {
 		// TODO Auto-generated method stub
 		
 		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
@@ -195,7 +195,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		myQuery.select(myTabla).where(predicadoFinal);
 		
 		TypedQuery<Persona> myQueryFinal=this.entityManager.createQuery(myQuery);
-		return myQueryFinal.getSingleResult();
+		return myQueryFinal.getResultList();
 	}
 
 	@Override
