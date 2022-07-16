@@ -1,7 +1,5 @@
 package com.uce.edu.demo;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
-import com.uce.edu.demo.tarea17_18.service.IEstudianteJPAQueryService;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJPAService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -18,10 +16,10 @@ import com.uce.edu.demo.tarea17_18.service.IEstudianteJPAQueryService;
 @SpringBootApplication
 public class ProyectoU2AfApplication implements CommandLineRunner{
 	
-	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
+private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 	
 	@Autowired
-	private IEstudianteJPAQueryService estudianteJPAService;
+	private IPersonaJPAService personaJPACService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -31,16 +29,15 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		//Uso de Native
-		EstudianteQuery estu=this.estudianteJPAService.buscarPorCedulaNative("1752310126");
-		LOG.info("Buscar estudiante por cedula: "+estu);
-		List<EstudianteQuery> estudianList=this.estudianteJPAService.buscarPorNombreNative("Pepe");
-		estudianList.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por nombre: "+estudiante);});
+		// Criteria API
 		
-		//Uso de NamedNativeQuery
-		List<EstudianteQuery> estudianList1=this.estudianteJPAService.buscarPorNombreCarrera("Pepe", "Sistemas");
-		estudianList1.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por nombre y carrera: "+estudiante);});
-		List<EstudianteQuery> estudianList2=this.estudianteJPAService.buscarPorFacultadCarrera("Ingenieria en ciencias aplicadas.", "Computacion");
-		estudianList2.stream().forEach(estudiante -> {LOG.info("Busqueda de esudiante por facultad y carrera: "+estudiante);});
+		Persona perTyped = this.personaJPACService.buscarPorCedulaCriterialAPI("1752310126");
+		LOG.info("Persona Criteria API: " + perTyped);
+		
+		Persona perDinamica = this.personaJPACService.buscarDinamicamente("Elizabeth", "Mejia", "F");
+		LOG.info("Persona Dinamica: " + perDinamica);
+		
+		
+
 	}
 }

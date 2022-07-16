@@ -28,4 +28,8 @@ public interface IPersonaJPAService {
 	// NativeQuery
 	public Persona buscarPorCedulaNative(String cedula);
 	public Persona buscarPorCedulaNamedNative(String cedula);
+	
+	//Criterial API
+	public Persona buscarPorCedulaCriterialAPI(String cedula);
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero);
 }

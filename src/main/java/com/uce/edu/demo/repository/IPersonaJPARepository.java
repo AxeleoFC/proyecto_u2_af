@@ -31,5 +31,6 @@ public interface IPersonaJPARepository {
 	
 	//Criterial API
 	public Persona buscarPorCedulaCriterialAPI(String cedula);
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero);
 
 }
