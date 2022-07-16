@@ -147,7 +147,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 	//Buscar con un if/ si es hombre teine que tener el nombre y apellido igual
 	//si es mujer puede tener el nombre o el apellido igual
 	@Override
-	public Persona buscarDinamicamente(String nombre, String apellido, String genero) {
+	public List<Persona> buscarDinamicamente(String nombre, String apellido, String genero) {
 		// TODO Auto-generated method stub
 		
 		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
@@ -169,7 +169,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		myQuery.select(myTabla).where(predicadoFinal);
 		
 		TypedQuery<Persona> myQueryFinal=this.entityManager.createQuery(myQuery);
-		return myQueryFinal.getSingleResult();
+		return myQueryFinal.getResultList();
 	}
 	
 	public List<Persona> buscarDinamicamentePredicados(String nombre, String apellido, String genero) {

@@ -120,7 +120,7 @@ public class PersonaJPAServiceImpl implements IPersonaJPAService {
 	}
 
 	@Override
-	public Persona buscarDinamicamente(String nombre, String apellido, String genero) {
+	public List<Persona> buscarDinamicamente(String nombre, String apellido, String genero) {
 		// TODO Auto-generated method stub
 		return this.personaJPARepo.buscarDinamicamente(nombre, apellido, genero);
 	}

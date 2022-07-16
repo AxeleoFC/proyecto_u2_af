@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +36,8 @@ private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.c
 		Persona perTyped = this.personaJPACService.buscarPorCedulaCriterialAPI("1752310126");
 		LOG.info("Persona Criteria API: " + perTyped);
 		
-		Persona perDinamica = this.personaJPACService.buscarDinamicamente("Elizabeth", "Mejia", "F");
-		LOG.info("Persona Dinamica: " + perDinamica);
+		List<Persona> listaPersona = this.personaJPACService.buscarDinamicamente("Elizabeth", "Mejia", "F");
+		listaPersona.stream().forEach(persona -> {LOG.info("Persona Dinamica: "+persona);});
 		
 		
 
