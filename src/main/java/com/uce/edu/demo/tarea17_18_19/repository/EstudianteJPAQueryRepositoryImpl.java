@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea17_18.repository;
+package com.uce.edu.demo.tarea17_18_19.repository;
 
 import java.util.List;
 
@@ -6,15 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19.repository.modelo.EstudianteQuery;
 
 @Repository
 @Transactional
@@ -136,6 +136,63 @@ public class EstudianteJPAQueryRepositoryImpl implements IEstudianteJPAQueryRepo
 		myQuery.setParameter("datoNombre", nombre);
 		myQuery.setParameter("datoCarrera", carrera);
 		return myQuery.getResultList();
+	}
+
+	//Tarea 19
+	@Override
+	public List<EstudianteQuery> buscarNombreApellidoCriteriaAPI(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<EstudianteQuery> myQuery = myCriteria.createQuery(EstudianteQuery.class);
+		
+		Root<EstudianteQuery> myTabla=myQuery.from(EstudianteQuery.class);
+		
+		Predicate predicadoNombre=myCriteria.equal(myTabla.get("nombre"), nombre);
+		Predicate predicadoApellido=myCriteria.equal(myTabla.get("apellido"), apellido);
+		
+		Predicate predicadoFinal=myCriteria.and(predicadoNombre, predicadoApellido);
+		
+		myQuery.select(myTabla).where(predicadoFinal);
+		
+		TypedQuery<EstudianteQuery> myQueryFinal=this.entityManager.createQuery(myQuery);
+		return myQueryFinal.getResultList();
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarDinamicamenteNombreApellidoFacultatCarrera(String nombre, String apellido,
+			String facultada, String carrera) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<EstudianteQuery> myQuery = myCriteria.createQuery(EstudianteQuery.class);
+		
+		Root<EstudianteQuery> myTabla=myQuery.from(EstudianteQuery.class);
+		
+		Predicate predicadoNombre=myCriteria.equal(myTabla.get("nombre"), nombre);
+		Predicate predicadoApellido=myCriteria.equal(myTabla.get("apellido"), apellido);
+		Predicate predicadoFacultad=myCriteria.equal(myTabla.get("facultad"), facultada);
+		Predicate predicadoCarrera=myCriteria.equal(myTabla.get("carrera"), carrera);
+		
+		Predicate predicadoFinal=null;
+		if(facultada.equals("Ingenieria en ciencias aplicadas.")) {
+			//Si es de Ingenieria en ciencias aplicada, se busca a los estudiantes
+			//con el nombre y apellidos iguales al parametro
+			//o puede ser de la carrera dada por el parametro
+			predicadoFinal = myCriteria.and(predicadoNombre, predicadoApellido);
+			predicadoFinal = myCriteria.or(predicadoFinal, predicadoCarrera);
+			predicadoFinal = myCriteria.and(predicadoFinal, predicadoFacultad);
+		}else if(facultada.equals("Medicina")){
+			//Si es de Medicina, se busca a los estudiantes
+			//con el nombre o apellidos iguales al parametro
+			//y puede ser de la carrera dada por el parametro
+			predicadoFinal = myCriteria.or(predicadoNombre, predicadoApellido);
+			predicadoFinal = myCriteria.and(predicadoFinal, predicadoCarrera);
+			predicadoFinal = myCriteria.and(predicadoFinal, predicadoFacultad);
+		}
+		
+		myQuery.select(myTabla).where(predicadoFinal);
+		
+		TypedQuery<EstudianteQuery> myQueryFinal=this.entityManager.createQuery(myQuery);
+		return myQueryFinal.getResultList();
 	}
 
 }

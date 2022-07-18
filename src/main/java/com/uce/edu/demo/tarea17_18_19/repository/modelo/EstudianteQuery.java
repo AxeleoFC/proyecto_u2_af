@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea17_18.repository.modelo;
+package com.uce.edu.demo.tarea17_18_19.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +7,6 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import com.uce.edu.demo.repository.modelo.Persona;
 
 @Entity
 @Table(name = "estudiante_query")

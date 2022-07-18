@@ -1,12 +1,12 @@
-package com.uce.edu.demo.tarea17_18.service;
+package com.uce.edu.demo.tarea17_18_19.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.tarea17_18.repository.IEstudianteJPAQueryRepository;
-import com.uce.edu.demo.tarea17_18.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19.repository.IEstudianteJPAQueryRepository;
+import com.uce.edu.demo.tarea17_18_19.repository.modelo.EstudianteQuery;
 
 @Service
 public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService {
@@ -98,6 +98,20 @@ public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService
 	public List<EstudianteQuery> buscarPorNombreCarrera(String nombre, String carrera) {
 		// TODO Auto-generated method stub
 		return this.estudianteRepo.buscarPorNombreCarrera(nombre, carrera);
+	}
+
+	//Tarea 19
+	@Override
+	public List<EstudianteQuery> buscarNombreApellidoCriteriaAPI(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarNombreApellidoCriteriaAPI(nombre, apellido);
+	}
+
+	@Override
+	public List<EstudianteQuery> buscarDinamicamenteNombreApellidoFacultatCarrera(String nombre, String apellido,
+			String facultada, String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarDinamicamenteNombreApellidoFacultatCarrera(nombre, apellido, facultada, carrera);
 	}
 
 }

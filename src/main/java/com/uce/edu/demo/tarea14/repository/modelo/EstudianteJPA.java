@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "estudiante")
+//@Entity
+//@Table(name = "estudiante")
 public class EstudianteJPA {
 	@Id
 	@Column(name="cedula")
