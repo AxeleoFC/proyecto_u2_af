@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSensilla;
 @Repository
 @Transactional
 public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
@@ -221,7 +223,33 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		//Para retornar una lista
 		return myQuery.getResultList();
 	}
+	
+	// Uso de DTO
+	@Override
+	public List<PersonaSensilla> buscarPorApellidoSensillo(String apellido) {
+		// TODO Auto-generated method stub
+		
+		//Hacer referencia del objeto PersonaSensila con la referencia de su ubicacion
+		//com.uce.edu.demo.repository.modelo.PersonaSensilla
+		TypedQuery<PersonaSensilla> myQueri = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.PersonaSensilla(p.nombre, p.apellido) FROM Persona p WHERE p.apellido= :datoApellido",
+				PersonaSensilla.class);
+		myQueri.setParameter("datoApellido", apellido);
+		return myQueri.getResultList();
+	}
 
+	@Override
+	public List<PersonaContadorGenero> consultarCantidadPorGenero() {
+		// TODO Auto-generated method stub
+
+		TypedQuery<PersonaContadorGenero> myQueri = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.PersonaContadorGenero(p.genero, COUNT(p.genero)) "
+				+ "FROM Persona p "
+				+ "GROUP BY p.genero",
+				PersonaContadorGenero.class);
+		return myQueri.getResultList();
+	}
+	
 	@Override
 	public List<Persona> buscarPorNombreApellido(String nombre, String apellido) {
 		// TODO Auto-generated method stub
@@ -254,7 +282,7 @@ public class PersonaJPARepositoryImpl implements IPersonaJPARepository {
 		//Devuelve el numero de actualizaciones o eliminaciones que halla echo
 		return myQuery.executeUpdate();
 	}
-
+	
 	@Override
 	public int eliminarPorGenero(String genero) {
 		// TODO Auto-generated method stub
