@@ -1,8 +1,10 @@
-package com.uce.edu.demo.tarea17_18_19.service;
+package com.uce.edu.demo.tarea17_18_19_20.service;
 
 import java.util.List;
 
-import com.uce.edu.demo.tarea17_18_19.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo;
 
 public interface IEstudianteJPAQueryService {
 	
@@ -41,5 +43,7 @@ public interface IEstudianteJPAQueryService {
 	public List<EstudianteQuery> buscarNombreApellidoCriteriaAPI(String nombre, String apellido);
 	public List<EstudianteQuery> buscarDinamicamenteNombreApellidoFacultatCarrera(String nombre, String apellido, String facultada, String carrera);
 
-
+	//Tarea 20
+	public List<EstudianteQuerySencillo> buscarPorCarreraSencillo(String carrera);
+	public List<EstudianteQueryPorCarrera> consultarEstudiantesPorCarrera(String facultad);
 }

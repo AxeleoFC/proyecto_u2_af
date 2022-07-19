@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea17_18_19.repository.modelo;
+package com.uce.edu.demo.tarea17_18_19_20.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

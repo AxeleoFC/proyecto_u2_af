@@ -10,8 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
-import com.uce.edu.demo.repository.modelo.PersonaSensilla;
-import com.uce.edu.demo.service.IPersonaJPAService;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo;
+import com.uce.edu.demo.tarea17_18_19_20.service.IEstudianteJPAQueryService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -22,7 +23,7 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 
 	@Autowired
-	private IPersonaJPAService personaJPACService;
+	private IEstudianteJPAQueryService estudianteJPACService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -31,24 +32,18 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		// Criteria API
-//		
-//		Persona perTyped = this.personaJPACService.buscarPorCedulaCriterialAPI("1752310126");
-//		LOG.info("Persona Criteria API: " + perTyped);
-//
-//		List<Persona> listaPersona = this.personaJPACService.buscarDinamicamente("Elizabeth", "Mejia", "F");
-//		listaPersona.stream().forEach(persona -> {
-//			LOG.info("Persona Dinamica: " + persona);
-//		});
 		
-		List<PersonaSensilla> listaPersona = this.personaJPACService.buscarPorApellidoSensillo("Flores");
-		listaPersona.stream().forEach(persona -> {
-			LOG.info("Persona sensilla: " + persona);
+		//Busqueda sencilla
+		List<EstudianteQuerySencillo> listaEstudiante = this.estudianteJPACService.buscarPorCarreraSencillo("Computacion");
+		listaEstudiante.stream().forEach(estudiante -> {
+			LOG.info("Estudiante sencillo por carrera: " + estudiante);
 		});
 		
-		List<PersonaContadorGenero> listaPersona1 = this.personaJPACService.consultarCantidadPorGenero();
-		listaPersona1.stream().forEach(persona -> {
-			LOG.info("Personas por genero: " + persona);
+		//Busqueda sencilla con agrupamiento
+		String facultad="Ingenieria en ciencias aplicadas.";
+		List<EstudianteQueryPorCarrera> listaEstudiante1 = this.estudianteJPACService.consultarEstudiantesPorCarrera(facultad);
+		listaEstudiante1.stream().forEach(estudiante -> {
+			LOG.info("Estudiantes por carrera de la facultad de "+facultad+" : " + estudiante);
 		});
 	}
 }

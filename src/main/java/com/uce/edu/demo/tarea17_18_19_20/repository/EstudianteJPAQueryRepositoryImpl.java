@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea17_18_19.repository;
+package com.uce.edu.demo.tarea17_18_19_20.repository;
 
 import java.util.List;
 
@@ -14,7 +14,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.tarea17_18_19.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo;
 
 @Repository
 @Transactional
@@ -193,6 +195,32 @@ public class EstudianteJPAQueryRepositoryImpl implements IEstudianteJPAQueryRepo
 		
 		TypedQuery<EstudianteQuery> myQueryFinal=this.entityManager.createQuery(myQuery);
 		return myQueryFinal.getResultList();
+	}
+
+	//Tarea 20
+	@Override
+	public List<EstudianteQuerySencillo> buscarPorCarreraSencillo(String carrera) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteQuerySencillo> myQueri = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo(e.nombre, e.carrera) "
+				+ "FROM EstudianteQuery e "
+				+ "WHERE e.carrera= :datoCarrera",
+				EstudianteQuerySencillo.class);
+		myQueri.setParameter("datoCarrera", carrera);
+		return myQueri.getResultList();
+	}
+
+	@Override
+	public List<EstudianteQueryPorCarrera> consultarEstudiantesPorCarrera(String facultad) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteQueryPorCarrera> myQueri = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera(e.carrera, COUNT(e.carrera)) "
+				+ "FROM EstudianteQuery e "
+				+ "WHERE e.facultad= :datoFacultad "
+				+ "GROUP BY e.carrera",
+				EstudianteQueryPorCarrera.class);
+		myQueri.setParameter("datoFacultad", facultad);
+		return myQueri.getResultList();
 	}
 
 }

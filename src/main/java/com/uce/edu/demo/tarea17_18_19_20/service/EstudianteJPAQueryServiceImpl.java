@@ -1,12 +1,14 @@
-package com.uce.edu.demo.tarea17_18_19.service;
+package com.uce.edu.demo.tarea17_18_19_20.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.tarea17_18_19.repository.IEstudianteJPAQueryRepository;
-import com.uce.edu.demo.tarea17_18_19.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.IEstudianteJPAQueryRepository;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuery;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera;
+import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo;
 
 @Service
 public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService {
@@ -112,6 +114,19 @@ public class EstudianteJPAQueryServiceImpl implements IEstudianteJPAQueryService
 			String facultada, String carrera) {
 		// TODO Auto-generated method stub
 		return this.estudianteRepo.buscarDinamicamenteNombreApellidoFacultatCarrera(nombre, apellido, facultada, carrera);
+	}
+
+	//Tarea 20
+	@Override
+	public List<EstudianteQuerySencillo> buscarPorCarreraSencillo(String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorCarreraSencillo(carrera);
+	}
+
+	@Override
+	public List<EstudianteQueryPorCarrera> consultarEstudiantesPorCarrera(String facultad) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.consultarEstudiantesPorCarrera(facultad);
 	}
 
 }
