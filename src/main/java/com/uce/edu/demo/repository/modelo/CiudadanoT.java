@@ -10,9 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "ciudadano")
-public class Ciudadano {
+//@Entity
+//@Table(name = "ciudadano")
+public class CiudadanoT {
 	
 	@Id
 	@Column(name = "ciud_id")

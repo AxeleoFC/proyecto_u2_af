@@ -1,9 +1,9 @@
 package com.uce.edu.demo.service;
 
-import com.uce.edu.demo.repository.modelo.Ciudadano;
+import com.uce.edu.demo.repository.modelo.CiudadanoT;
 
 public interface ICiudadanoService {
 	
-	public void ingresarCiudadano(Ciudadano c);
+	public void ingresarCiudadano(CiudadanoT c);
 
 }

@@ -12,8 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "empleado")
+//@Entity
+//@Table(name = "empleado")
 public class Empleado {
 	
 	@Id
@@ -30,7 +30,7 @@ public class Empleado {
 	
 	@OneToOne
 	@JoinColumn(name="empl_id_ciudadano")
-	private Ciudadano ciudadano;
+	private CiudadanoT ciudadano;
 	
 	@Override
 	public String toString() {
@@ -58,11 +58,11 @@ public class Empleado {
 		this.salario = salario;
 	}
 
-	public Ciudadano getCiudadano() {
+	public CiudadanoT getCiudadano() {
 		return ciudadano;
 	}
 
-	public void setCiudadano(Ciudadano ciudadano) {
+	public void setCiudadano(CiudadanoT ciudadano) {
 		this.ciudadano = ciudadano;
 	}
 	
