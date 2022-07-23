@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.CiudadanoT;
+import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
 @Repository
 @Transactional
 public class CiudadanoRepositoryImpl implements ICiudadanoRepository {
@@ -15,7 +15,7 @@ public class CiudadanoRepositoryImpl implements ICiudadanoRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public void ingresar(CiudadanoT c) {
+	public void ingresar(Ciudadano c) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(c);
 	}

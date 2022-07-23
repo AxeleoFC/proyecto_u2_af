@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.ICiudadanoRepository;
-import com.uce.edu.demo.repository.modelo.CiudadanoT;
+import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
 @Service
 public class CiudadanoServiceImpl implements ICiudadanoService {
 	
@@ -12,7 +12,7 @@ public class CiudadanoServiceImpl implements ICiudadanoService {
 	private ICiudadanoRepository ciudadanoRepo;
 
 	@Override
-	public void ingresarCiudadano(CiudadanoT c) {
+	public void ingresarCiudadano(Ciudadano c) {
 		// TODO Auto-generated method stub
 		this.ciudadanoRepo.ingresar(c);
 	}

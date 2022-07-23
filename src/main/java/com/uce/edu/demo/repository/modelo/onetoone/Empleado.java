@@ -1,7 +1,8 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.repository.modelo.onetoone;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "empleado")
+@Entity
+@Table(name = "empleado")
 public class Empleado {
 	
 	@Id
@@ -28,9 +29,9 @@ public class Empleado {
 	@Column(name="empl_salario")
 	private BigDecimal salario;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="empl_id_ciudadano")
-	private CiudadanoT ciudadano;
+	private Ciudadano ciudadano;
 	
 	@Override
 	public String toString() {
@@ -58,11 +59,11 @@ public class Empleado {
 		this.salario = salario;
 	}
 
-	public CiudadanoT getCiudadano() {
+	public Ciudadano getCiudadano() {
 		return ciudadano;
 	}
 
-	public void setCiudadano(CiudadanoT ciudadano) {
+	public void setCiudadano(Ciudadano ciudadano) {
 		this.ciudadano = ciudadano;
 	}
 	

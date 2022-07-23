@@ -6,19 +6,18 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.onetoone.Empleado;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
 @Repository
 @Transactional
-public class EmpleadoRepositoryImpl implements IEmpleadoRepository {
+public class HotelRepositoryImpl implements IHotelRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public void ingresar(Empleado e) {
+	public void insertar(Hotel hotel) {
 		// TODO Auto-generated method stub
-		this.entityManager.persist(e);
-
+		this.entityManager.persist(hotel);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.uce.edu.demo.repository.modelo;
+package com.uce.edu.demo.repository.modelo.onetoone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +10,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "ciudadano")
-public class CiudadanoT {
+@Entity
+@Table(name = "ciudadano")
+public class Ciudadano {
 	
 	@Id
 	@Column(name = "ciud_id")
@@ -25,6 +25,7 @@ public class CiudadanoT {
 	@Column(name="ciud_apellido")
 	private String apellido;
 	
+	//Relacion uno a uno
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Empleado empleado;
 	

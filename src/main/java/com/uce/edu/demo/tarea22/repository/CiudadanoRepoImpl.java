@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.tarea22.repository.modelo.Ciudadano;
+import com.uce.edu.demo.tarea22.repository.modelo.CiudadanoV;
 @Repository
 @Transactional
 public class CiudadanoRepoImpl implements ICiudadanoRepo {
@@ -16,21 +16,21 @@ public class CiudadanoRepoImpl implements ICiudadanoRepo {
 	private EntityManager entityManager;
 
 	@Override
-	public Ciudadano buscarPorCedula(String cedula) {
+	public CiudadanoV buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
 		Query jpqlQuery=this.entityManager.createQuery("SELECT c FROM Ciudadano c WHERE c.cedula= :datoCedula");
 		jpqlQuery.setParameter("datoCedula", cedula);
-		return (Ciudadano) jpqlQuery.getSingleResult();
+		return (CiudadanoV) jpqlQuery.getSingleResult();
 	}
 
 	@Override
-	public void insertar(com.uce.edu.demo.tarea22.repository.modelo.Ciudadano c) {
+	public void insertar(com.uce.edu.demo.tarea22.repository.modelo.CiudadanoV c) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(c);
 	}
 
 	@Override
-	public void actualizar(com.uce.edu.demo.tarea22.repository.modelo.Ciudadano c) {
+	public void actualizar(com.uce.edu.demo.tarea22.repository.modelo.CiudadanoV c) {
 		// TODO Auto-generated method stub
 		this.entityManager.merge(c);
 	}

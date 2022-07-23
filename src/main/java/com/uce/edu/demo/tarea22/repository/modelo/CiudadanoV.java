@@ -12,10 +12,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "ciudadano")
-public class Ciudadano {
-	
+//@Entity
+//@Table(name = "ciudadano")
+//Cambiar por Ciudadano
+public class CiudadanoV {
+	/*
 	@Id
 	@Column(name = "ciuda_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciuda_id_seq")
@@ -90,6 +91,6 @@ public class Ciudadano {
 
 	public void setPasaporte(Pasaporte pasaporte) {
 		this.pasaporte = pasaporte;
-	}
+	}*/
 
 }

@@ -1,8 +1,6 @@
 package com.uce.edu.demo;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,15 +9,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Empleado;
-import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
+import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
+import com.uce.edu.demo.repository.modelo.onetoone.Empleado;
 import com.uce.edu.demo.service.ICiudadanoService;
-import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQueryPorCarrera;
-import com.uce.edu.demo.tarea17_18_19_20.repository.modelo.EstudianteQuerySencillo;
-import com.uce.edu.demo.tarea17_18_19_20.service.IEstudianteJPAQueryService;
-import com.uce.edu.demo.tarea22.repository.modelo.Ciudadano;
-import com.uce.edu.demo.tarea22.repository.modelo.Pasaporte;
-import com.uce.edu.demo.tarea22.service.ICiudadanoPService;
+import com.uce.edu.demo.service.IHabitacionService;
+import com.uce.edu.demo.service.IHotelService;
 
 //similar a log4j
 //import org.slf4j.Logger;
@@ -30,7 +26,9 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	private static final Logger LOG = LogManager.getLogger(ProyectoU2AfApplication.class.getName());
 
 	@Autowired
-	private ICiudadanoPService ciudadanoService;
+	private IHotelService hotelService;
+	@Autowired
+	private IHabitacionService habitacionService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AfApplication.class, args);
@@ -40,35 +38,30 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		//Tarea 22
-		Ciudadano ciu1=new Ciudadano();
-		ciu1.setNombre("Jose");
-		ciu1.setApellido("Vinueza");
-		ciu1.setCedula("1752363212");
-		ciu1.setFechaNacimiento(LocalDateTime.of(2000, 01, 16, 17, 52));
+		Hotel hotel1=new Hotel();
+		hotel1.setNombre("Hilton Colon Quito");
+		hotel1.setDireccion("Centro");
 		
-		Pasaporte pas1=new Pasaporte();
-		pas1.setNumero("1452321");
-		pas1.setFechaEmision(LocalDateTime.now());
-		pas1.setFechaCaducidad(LocalDateTime.now().plusYears(1));
+		this.hotelService.insertar(hotel1);
 		
-		ciu1.setPasaporte(pas1);
+		//Hotel hotel=new Hotel();
+		//hotel.setId(1);
 		
-		this.ciudadanoService.insertar(ciu1);
-		LOG.info("Se a insertado al ciudadano:");
-		LOG.info(ciu1);
+		Habitacion habi1=new Habitacion();
+		habi1.setNumero("A2334");
+		habi1.setPiso("10");
+		habi1.setTipo("Familiar");
 		
-		LOG.info("Se a buscado al ciudadano:");
-		LOG.info(this.ciudadanoService.buscarPorCedula("1752363212"));
+		Habitacion habi2=new Habitacion();
+		habi2.setHotel(hotel1);
+		habi2.setNumero("A4545");
+		habi2.setPiso("2");
+		habi2.setTipo("Matrimonial");
 		
-		ciu1.setApellido("Martinez");
-		this.ciudadanoService.actualizar(ciu1);
-		LOG.info("Se a actualizado al ciudadano:");
-		LOG.info(this.ciudadanoService.buscarPorCedula("1752363212"));
+		this.habitacionService.insertar(habi2);
 		
-
-		this.ciudadanoService.eliminar("1752363212");
-		LOG.info("Se a eliminado al ciudadano");
+		
+		
 		
 	}
 }
