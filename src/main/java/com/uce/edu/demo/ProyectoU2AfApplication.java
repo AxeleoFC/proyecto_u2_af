@@ -89,8 +89,13 @@ public class ProyectoU2AfApplication implements CommandLineRunner{
 		
 		
 		//Actualizar
-		per.setNumero("0998452369");
-		this.personaService.actualizar(per);
+		PersonaB per1=new PersonaB();
+		per1.setNombre("Axel");
+		per1.setApellido("Flores");
+		per1.setCedula("1752310126");
+		per1.setNumero("0998452369");
+		
+		this.personaService.actualizar(per1);
 		
 		LOG.info("Se a actualizado a la persona:");
 		LOG.info(this.personaService.buscarPorCedula("1752310126"));
