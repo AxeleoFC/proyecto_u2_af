@@ -1,0 +1,9 @@
+package com.uce.edu.demo.cajero.repository;
+
+import com.uce.edu.demo.cajero.repository.modelo.Cliente;
+
+public interface IClienteRepository {
+	
+	public void ingresar(Cliente c);
+
+}
