@@ -1,10 +1,10 @@
-package com.uce.edu.demo.tarea16.service;
+package com.uce.edu.demo.tarea16_25.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.tarea16.repository.IVehiculoRepository;
-import com.uce.edu.demo.tarea16.repository.modelo.Vehiculo;
+import com.uce.edu.demo.tarea16_25.repository.IVehiculoRepository;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Vehiculo;
 
 @Service
 public class VehiculoServiceImpl implements IVehiculoService {

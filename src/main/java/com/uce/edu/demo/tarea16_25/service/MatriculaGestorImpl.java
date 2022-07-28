@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea16.service;
+package com.uce.edu.demo.tarea16_25.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.tarea16.repository.IMatriculaRepository;
-import com.uce.edu.demo.tarea16.repository.IPropietarioRepository;
-import com.uce.edu.demo.tarea16.repository.modelo.Matricula;
-import com.uce.edu.demo.tarea16.repository.modelo.Propietario;
-import com.uce.edu.demo.tarea16.repository.modelo.Vehiculo;
+import com.uce.edu.demo.tarea16_25.repository.IMatriculaRepository;
+import com.uce.edu.demo.tarea16_25.repository.IPropietarioRepository;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Matricula;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Propietario;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Vehiculo;
 @Service
 public class MatriculaGestorImpl implements IMatriculaGestorService{
 	@Autowired
@@ -50,9 +50,9 @@ public class MatriculaGestorImpl implements IMatriculaGestorService{
 		Matricula matricula=new Matricula();
 		matricula.setFechaMatriculacion(LocalDateTime.now());
 		//matricula.setVehiculo(vehi);
-		matricula.setVehiculoPlaca(vehi.getPlaca());
+		matricula.setVehiculo(vehi);
 		//matricula.setPropietario(pro);
-		matricula.setPropietarioCedula(pro.getCedula());
+		matricula.setPropietario(pro);
 		matricula.setPrecioMatriculacion(valorMatricula);
 		this.matriculaRepo.ingresar(matricula);
 	}

@@ -1,12 +1,16 @@
-package com.uce.edu.demo.tarea16.repository.modelo;
+package com.uce.edu.demo.tarea16_25.repository.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,19 +29,21 @@ public class Matricula {
 	@Column(name="matr_precio")
 	private BigDecimal precio;
 	
-	@Column(name="matr_propietario_cedula")
-	private String propietarioCedula;
+	@OneToOne
+	@JoinColumn(name = "vehi_matri_id")
+	private Vehiculo vehiculo;
 	
-	@Column(name="matr_vehiculo_placa")
-	private String vehiculoPlaca;
+	@ManyToOne
+	@JoinColumn(name = "prop_matr_id")
+	private Propietario propietario;
+	
 	
 	
 	@Override
 	public String toString() {
-		return "Matricula [fechaMatriculacion=" + fechaMatriculacion + ", precioMatriculacion=" + precio
-				+ ", propietarioCedula=" + propietarioCedula + ", vehiculoPlaca=" + vehiculoPlaca + "]";
+		return "Matricula [numero=" + numero + ", fechaMatriculacion=" + fechaMatriculacion + ", precio=" + precio
+				+ ", vehiculo=" + vehiculo + ", propietario=" + propietario.getNombre() + "]";
 	}
-	
 	//SET y GET
 	public LocalDateTime getFechaMatriculacion() {
 		return fechaMatriculacion;
@@ -52,21 +58,36 @@ public class Matricula {
 		this.precio = precioMatriculacion;
 	}
 
-	public String getPropietarioCedula() {
-		return propietarioCedula;
+	public Integer getNumero() {
+		return numero;
 	}
 
-	public void setPropietarioCedula(String propietarioCedula) {
-		this.propietarioCedula = propietarioCedula;
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
-	public String getVehiculoPlaca() {
-		return vehiculoPlaca;
+	public BigDecimal getPrecio() {
+		return precio;
 	}
 
-	public void setVehiculoPlaca(String vehiculoPlaca) {
-		this.vehiculoPlaca = vehiculoPlaca;
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
 	}
-	
+
+	public Propietario getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Propietario propietario) {
+		this.propietario = propietario;
+	}
+
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
 
 }

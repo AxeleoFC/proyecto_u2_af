@@ -1,6 +1,6 @@
-package com.uce.edu.demo.tarea16.repository;
+package com.uce.edu.demo.tarea16_25.repository;
 
-import com.uce.edu.demo.tarea16.repository.modelo.Vehiculo;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Vehiculo;
 
 public interface IVehiculoRepository {
 	public void ingresar(Vehiculo v);

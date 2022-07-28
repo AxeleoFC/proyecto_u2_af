@@ -1,11 +1,15 @@
-package com.uce.edu.demo.tarea16.repository.modelo;
+package com.uce.edu.demo.tarea16_25.repository.modelo;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.uce.edu.demo.cajero.repository.modelo.Ciudadano;
 
 @Entity
 @Table(name = "vehiculo")
@@ -21,11 +25,16 @@ public class Vehiculo {
 	@Column(name="vehi_precio")
 	private BigDecimal precio;
 	
+	@OneToOne(mappedBy = "vehiculo")
+	private Matricula matricula;
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Vehiculo [Marca=" + marca + ", Placa=" + placa + ", Tipo=" + tipo + ", Precio=" + precio + "]";
+		return "Vehiculo [placa=" + placa + ", marca=" + marca + ", tipo=" + tipo + ", precio=" + precio
+				+ ", matricula=" + matricula + "]";
 	}
-	
 	//SET y GET
 	public String getMarca() {
 		return marca;
@@ -52,4 +61,12 @@ public class Vehiculo {
 		this.precio = precio;
 	}
 
+	public Matricula getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+	
 }

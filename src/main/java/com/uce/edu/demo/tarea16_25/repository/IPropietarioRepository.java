@@ -1,6 +1,6 @@
-package com.uce.edu.demo.tarea16.repository;
+package com.uce.edu.demo.tarea16_25.repository;
 
-import com.uce.edu.demo.tarea16.repository.modelo.Propietario;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Propietario;
 
 public interface IPropietarioRepository {
 	public void ingresar(Propietario p);

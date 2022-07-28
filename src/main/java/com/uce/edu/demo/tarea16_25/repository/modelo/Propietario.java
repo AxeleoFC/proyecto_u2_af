@@ -1,10 +1,12 @@
-package com.uce.edu.demo.tarea16.repository.modelo;
+package com.uce.edu.demo.tarea16_25.repository.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,10 +23,13 @@ public class Propietario {
 	@Column(name="propi_fNacimiento")
 	private LocalDateTime fechaNacimiento;
 	
+	@OneToMany(mappedBy = "propietario")
+	private List<Matricula> matriculas;
+	
 	@Override
 	public String toString() {
-		return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", fechaNacimiento="
-				+ fechaNacimiento + "]";
+		return "Propietario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
+				+ fechaNacimiento + ", matriculas=" + matriculas + "]";
 	}
 	
 	//SET y GET
@@ -53,4 +58,11 @@ public class Propietario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
 }

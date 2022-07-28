@@ -1,4 +1,4 @@
-package com.uce.edu.demo.tarea16.repository;
+package com.uce.edu.demo.tarea16_25.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.tarea16.repository.modelo.Propietario;
+import com.uce.edu.demo.tarea16_25.repository.modelo.Propietario;
 
 @Repository
 @Transactional
